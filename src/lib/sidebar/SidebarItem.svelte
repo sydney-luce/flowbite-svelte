@@ -8,20 +8,15 @@
   export let spanClass: string = 'ms-3';
   export let activeClass: string | undefined = undefined;
   export let nonActiveClass: string | undefined = undefined;
-  // export let active: boolean = false;
+  export let active: boolean = false;
 
   const context = getContext<SidebarType>('sidebarContext') ?? {};
   const activeUrlStore = getContext('activeUrl') as { subscribe: (callback: (value: string) => void) => void };
 
   let sidebarUrl = '';
   activeUrlStore.subscribe((value) => {
-    // console.log('value: ', value)
     sidebarUrl = value;
   });
-  // console.log('sidbarUrl: ', sidebarUrl)
-  // console.log('href: ', href)
-  $: active = sidebarUrl ? href === sidebarUrl : false;
-  // console.log('active: ', active)
 
   $: aClass = twMerge(active ? activeClass ?? context.activeClass : nonActiveClass ?? context.nonActiveClass, $$props.class);
 </script>
